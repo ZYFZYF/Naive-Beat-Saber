@@ -64,6 +64,9 @@ public class Generate : MonoBehaviour
             GameObject cube = Instantiate(template, position, Quaternion.identity);
             cube.transform.Rotate(rotation);
             cube.name = "Cube " + generateCubeIndex;
+            Meta meta = cube.GetComponent<Meta>();
+            meta.color = color;
+            meta.direction = direction;
             generateCubeIndex++;
         }
 
