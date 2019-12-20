@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Generate : MonoBehaviour
 {
 
@@ -21,6 +22,7 @@ public class Generate : MonoBehaviour
     private float Y_CENTER_POS = 2;
     private float Y_STEP_LENGTH = 1;
     // Use this for initialization
+
     void Start()
     {
         TextAsset textAsset = Resources.Load("test", typeof(TextAsset)) as TextAsset;
@@ -32,22 +34,24 @@ public class Generate : MonoBehaviour
             cubeData[i] = lineArray[i + 1].Split(',');
             for (int j = 0; j < cubeData[i].Length; j++)
             {
-                Debug.Log(string.Format("{0} {1} {2}", i, j, cubeData[i][j]));
+                //Debug.Log(string.Format("{0} {1} {2}", i, j, cubeData[i][j]));
             }
         }
+
+		Web.init ();
     }
     // Update is called once per frame
     void Update()
     {
         float nowTime = Time.timeSinceLevelLoad;
-        //Debug.Log(string.Format("{0} {1}", generateCubeIndex, cubeCount));
+        //Debug.Log(strisng.Format("{0} {1}", generateCubeIndex, cubeCount));
         while (generateCubeIndex < cubeCount && float.Parse(cubeData[generateCubeIndex][0]) < nowTime + Z_MOVE_TIME)
         {
             int color = int.Parse(cubeData[generateCubeIndex][1]);
             int direction = int.Parse(cubeData[generateCubeIndex][2]);
             int xPos = int.Parse(cubeData[generateCubeIndex][3]);
             int yPos = int.Parse(cubeData[generateCubeIndex][4]);
-            Debug.Log(string.Format("{0} {1} {2} {3}", color, direction, xPos, yPos));
+            //Debug.Log(string.Format("{0} {1} {2} {3}", color, direction, xPos, yPos));
             Vector3 position = new Vector3(X_START_POS + X_STEP_LENGTH * xPos, Y_CENTER_POS + Y_STEP_LENGTH * yPos, Z_MOVE_TARGET
             + Z_MOVE_TIME * Z_MOVE_SPEED);
             Vector3 rotation = new Vector3(0, 0, direction * 45);
