@@ -21,6 +21,7 @@ public class Generate : MonoBehaviour
     private float X_STEP_LENGTH = 1;
     private float Y_CENTER_POS = 2;
     private float Y_STEP_LENGTH = 1;
+    private float Z_DISAPPEAR_POS = -1;
     // Use this for initialization
 
     void Start()
@@ -38,7 +39,7 @@ public class Generate : MonoBehaviour
             }
         }
 
-		Web.init ();
+        Web.init();
     }
     // Update is called once per frame
     void Update()
@@ -62,9 +63,20 @@ public class Generate : MonoBehaviour
             else template = rightSpecialCubePrefab;
             GameObject cube = Instantiate(template, position, Quaternion.identity);
             cube.transform.Rotate(rotation);
+            cube.name = "Cube " + generateCubeIndex;
             generateCubeIndex++;
         }
 
-        //TODO 销毁已经淡出视野的Cube
+        while (destroyCubeIndex < generateCubeIndex)
+        {
+            GameObject destroyCube = GameObject.Find("Cube " + destroyCubeIndex);
+            if (destroyCube != null && destroyCube.transform.position.z < Z_DISAPPEAR_POS)
+            {
+                Destroy(destroyCube);
+                destroyCubeIndex++;
+                Debug.Log("destroy cube " + destroyCubeIndex);
+            }
+            else break;
+        }
     }
 }
