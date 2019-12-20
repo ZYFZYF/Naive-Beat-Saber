@@ -17,14 +17,5 @@ public class Move : MonoBehaviour
         transform.Translate(-Vector3.forward * speed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Collision enter");
-    }
 
-    private void OnTriggerEnter(Collider collider)
-    {
-        Debug.Log("Trigger enter");
-        Debug.Log(collider.ToString());
-    }
 }
