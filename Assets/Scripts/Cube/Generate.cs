@@ -48,25 +48,30 @@ public class Generate : MonoBehaviour
         //Debug.Log(strisng.Format("{0} {1}", generateCubeIndex, cubeCount));
         while (generateCubeIndex < cubeCount && float.Parse(cubeData[generateCubeIndex][0]) < nowTime + Z_MOVE_TIME)
         {
+            //先从每一行解析出数据
             int color = int.Parse(cubeData[generateCubeIndex][1]);
             int direction = int.Parse(cubeData[generateCubeIndex][2]);
             int xPos = int.Parse(cubeData[generateCubeIndex][3]);
             int yPos = int.Parse(cubeData[generateCubeIndex][4]);
             //Debug.Log(string.Format("{0} {1} {2} {3}", color, direction, xPos, yPos));
+            //得到初始位置和旋转角度
             Vector3 position = new Vector3(X_START_POS + X_STEP_LENGTH * xPos, Y_CENTER_POS + Y_STEP_LENGTH * yPos, Z_MOVE_TARGET
             + Z_MOVE_TIME * Z_MOVE_SPEED);
             Vector3 rotation = new Vector3(0, 0, direction * 45);
+            //不同设定的模块贴图不一样，实现上是prefab不一样
             GameObject template;
             if (color == 0 && direction >= 0) template = leftNormalCubePrefab;
             else if (color == 0 && direction < 0) template = leftSpecialCubePrefab;
             else if (color == 1 && direction >= 0) template = rightNormalCubePrefab;
             else template = rightSpecialCubePrefab;
+            //实例化，并且存一些meta信息进去
             GameObject cube = Instantiate(template, position, Quaternion.identity);
-            cube.transform.Rotate(rotation);
+            if (direction >= 0) cube.transform.Rotate(rotation);
             cube.name = "Cube " + generateCubeIndex;
             Meta meta = cube.GetComponent<Meta>();
             meta.color = color;
             meta.direction = direction;
+            Debug.Log("generate " + cube.name);
             generateCubeIndex++;
         }
 

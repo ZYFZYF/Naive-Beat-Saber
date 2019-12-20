@@ -17,12 +17,13 @@
 				- json也可读，还可以存储其他数据，但是也是不容易批量修改
 				- csv方便批量修改（用excel or numbers）
 		- 爆炸
-			- 简化：可以从中间劈开（毁掉原来的物体，新建两个带重力的各一半，然后施加一个爆炸的瞬时力或者沿切割方向切线的顺势力 
+			- 简化：可以从中间劈开（毁掉原来的物体，新建两个带重力的各一半，然后施加一个爆炸的瞬时力或者沿切割方向切线的顺势力
 - 光剑
 	- 模型
 	  - [Unity Laser Sword - Volumetric Laser Sword in Unity. by Jeff Johnson (jjxtra)](https://github.com/jjxtra/UnityLaserSword)
 	- 碰撞检测
-		- 用自带的，然后在回调里去判断切割方向对不对	
+		- 用自带的，然后在回调里去判断切割方向对不对
+		- 这里光剑旋转的时候collider旋转好像跟不太上？（没法始终代表整个光剑）
 - 分数统计
 	- 用内置的PlayerPrefs类（自带的一个key-value的持久化存储工具）
 - 网络通讯
