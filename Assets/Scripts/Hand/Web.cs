@@ -12,16 +12,14 @@ using Newtonsoft.Json.Linq;
 
 public class Web:MonoBehaviour
 {
-	private static Web instance;
-	public static List<List<float>> hand;
+	private static Web instance=null;
+	public static float[,] hand;
 	private Web()
 	{
-		hand = new List<List<float>>(4);
-		for (int i = 0; i < 4; i++)
-			hand [i] = new List<float> (3);
+		Debug.Log("In Main: Creating the Child thread");
+		hand = new float[4, 3]; 
 		//parseString ("{"Right hand": "{"Distal": "85.6001205444 99.5957107544 89.5335693359", "Proximal": "94.1328048706 123.874298096 69.6296234131"}", "Left hand": "{"Distal": "-57.0477333069 52.4687042236 109.270484924", "Proximal": "-69.1746292114 82.2418823242 107.529426575"}"}");
 		ThreadStart childref = new ThreadStart(CallToChildThread);
-		Debug.Log("In Main: Creating the Child thread");
 		Thread childThread = new Thread(childref);
 		childThread.Start();
 	}
@@ -37,7 +35,7 @@ public class Web:MonoBehaviour
 	{
 		String[] sArray = input.Split(' ');
 		for (int i = 0; i < 3; i++)
-			hand [index] [i] = Convert.ToSingle (sArray[i]);
+			hand [index,i] = Convert.ToSingle (sArray[i]);
 
 	}
 	private static void parseString(string message)
@@ -50,12 +48,12 @@ public class Web:MonoBehaviour
 			JObject leftHand=JObject.Parse(left);
 
 			JObject rightHand = JObject.Parse (jo ["Right hand"].ToString ());
-
 			getFloat (0, leftHand ["Distal"].ToString ());
 			getFloat (1, leftHand ["Proximal"].ToString ());
 			getFloat (2, rightHand ["Distal"].ToString ());
 			getFloat (3, rightHand ["Proximal"].ToString ());
-			Debug.Log (hand [3][0]);
+			Debug.Log(hand[0,0]);
+			Debug.Log (hand [3,0]);
 		}
 		catch(Exception e)
 		{
@@ -70,7 +68,7 @@ public class Web:MonoBehaviour
 		//建立udp服务器，参数2：udp协议以数据报的方式传输，参数3：UDP协议
 		Socket udpServer=new Socket(AddressFamily.InterNetwork,SocketType.Dgram,ProtocolType.Udp);
 		//为服务器绑定IP
-		IPAddress ip=IPAddress.Parse("172.20.10.3");
+		IPAddress ip=IPAddress.Parse("127.0.0.1");
 		EndPoint ep=new IPEndPoint(ip,2345);
 		udpServer.Bind(ep);
 		//接收数据
