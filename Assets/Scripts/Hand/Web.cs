@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
@@ -9,11 +10,20 @@ using UnityEngine;
 using System.Threading;
 using Newtonsoft.Json.Linq;
 
+using Newtonsoft.Json;
+using System.Linq;
+
 
 public class Web:MonoBehaviour
 {
 	private static Web instance=null;
-	public static float[,] hand;
+	private static float[,] hand;
+
+	private static GameObject laser_left;
+	private static GameObject laser_right;
+	
+	private static int flag=0;
+
 	private Web()
 	{
 		Debug.Log("In Main: Creating the Child thread");
@@ -21,9 +31,24 @@ public class Web:MonoBehaviour
 		//parseString ("{"Right hand": "{"Distal": "85.6001205444 99.5957107544 89.5335693359", "Proximal": "94.1328048706 123.874298096 69.6296234131"}", "Left hand": "{"Distal": "-57.0477333069 52.4687042236 109.270484924", "Proximal": "-69.1746292114 82.2418823242 107.529426575"}"}");
 		ThreadStart childref = new ThreadStart(CallToChildThread);
 		Thread childThread = new Thread(childref);
+		laser_left=GameObject.Find("LaserSwordPrefab_Left");
+		laser_right=GameObject.Find("LaserSwordPrefab_Right");
+		laser_left.transform.position=new Vector3(-0.36f,2f,0.5f);
+		laser_right.transform.position=new Vector3(0.36f,2f,0.5f);
 		childThread.Start();
 	}
-
+	public void setLaserPos()
+	{
+		Debug.Log("flag");
+		if (flag==1)
+		{
+			Debug.Log("flag");
+			Debug.Log(laser_left.transform.position.x);
+			laser_left.transform.position=new Vector3(hand[0,0],hand[0,1],hand[0,2]);
+			laser_right.transform.position=new Vector3(hand[2,0],hand[2,1],hand[2,2]);
+			//flag=0;
+		}
+	}
 	public static Web getInstance()
 	{
 		if(instance==null)
@@ -35,30 +60,38 @@ public class Web:MonoBehaviour
 	{
 		String[] sArray = input.Split(' ');
 		for (int i = 0; i < 3; i++)
-			hand [index,i] = Convert.ToSingle (sArray[i]);
+			hand [index,i] = Convert.ToSingle (sArray[i])/120f;
 
 	}
 	private static void parseString(string message)
 	{
 		try
-		{
-			Debug.Log ("in parseString");
-			JObject jo = JObject.Parse(message);
-			string left = jo["Left hand"].ToString();
-			JObject leftHand=JObject.Parse(left);
+        {
+            Debug.Log("in parseString "+message);
+            JObject jo = JObject.Parse(message);
+			foreach (var x in jo)
+            {
+                Console.WriteLine("{0} : {1}", x.Key, x.Value);
+				string singlehand=x.Value.ToString();
+				JObject singleObj=JObject.Parse(singlehand);
+				if(x.Key=="Left hand")
+				{
+					getFloat(0, singleObj["Distal"].ToString());
+            		getFloat(1, singleObj["Proximal"].ToString());
+				}
+				else
+				{
+					getFloat(2, singleObj["Distal"].ToString());
+            		getFloat(3, singleObj["Proximal"].ToString());
+				}
+            }
+			flag=1;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
 
-			JObject rightHand = JObject.Parse (jo ["Right hand"].ToString ());
-			getFloat (0, leftHand ["Distal"].ToString ());
-			getFloat (1, leftHand ["Proximal"].ToString ());
-			getFloat (2, rightHand ["Distal"].ToString ());
-			getFloat (3, rightHand ["Proximal"].ToString ());
-			Debug.Log(hand[0,0]);
-			Debug.Log (hand [3,0]);
-		}
-		catch(Exception e)
-		{
-			Debug.Log(e);
-		}
 	}
 
 	private void CallToChildThread()
@@ -69,10 +102,10 @@ public class Web:MonoBehaviour
 		Socket udpServer=new Socket(AddressFamily.InterNetwork,SocketType.Dgram,ProtocolType.Udp);
 		//为服务器绑定IP
 		IPAddress ip=IPAddress.Parse("127.0.0.1");
-		EndPoint ep=new IPEndPoint(ip,2345);
+		EndPoint ep=new IPEndPoint(ip,2233);
 		udpServer.Bind(ep);
 		//接收数据
-		EndPoint endP=new IPEndPoint(IPAddress.Any,0);
+		EndPoint endP=new IPEndPoint(IPAddress.Any,2233);
 		string message;
 		byte[] data=new byte[1024];
 		int length=0;
@@ -84,7 +117,7 @@ public class Web:MonoBehaviour
 			Debug.Log ("in true");
 			length = udpServer.ReceiveFrom (data, ref endP);
 			message = Encoding.UTF8.GetString (data, 0, length);
-			Debug.Log (endP.ToString () + message);
+			//Debug.Log (endP.ToString () + message);
 			parseString (message);
 		}
 

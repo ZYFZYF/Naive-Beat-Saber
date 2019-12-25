@@ -24,8 +24,6 @@ public class Generate : MonoBehaviour
     private float Z_DISAPPEAR_POS = -1;
     // Use this for initialization
 
-    private Web instance;
-
     void Start()
     {
         TextAsset textAsset = Resources.Load("test", typeof(TextAsset)) as TextAsset;
@@ -40,8 +38,7 @@ public class Generate : MonoBehaviour
                 //Debug.Log(string.Format("{0} {1} {2}", i, j, cubeData[i][j]));
             }
         }
-
-        instance=Web.getInstance();
+        
     }
     // Update is called once per frame
     void Update()
