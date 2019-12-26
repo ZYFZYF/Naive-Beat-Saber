@@ -35,8 +35,55 @@ public class Web:MonoBehaviour
 		laser_right=GameObject.Find("LaserSwordPrefab_Right");
 		laser_left.transform.position=new Vector3(-0.36f,2f,0.5f);
 		laser_right.transform.position=new Vector3(0.36f,2f,0.5f);
+		//float x=getAngle(new Vector3(-1,0,1),new Vector3(1,0,0));
+		float testx=1f;
+		float testy=1f;
+		float testz=1f;
+
+		 
 		childThread.Start();
 	}
+
+	private static Vector3 GetVerticalDir(Vector3 _dir)
+    {
+        if (_dir.z == 0)
+        {
+            return new Vector3(0, 0, -1);
+        }
+        else
+        {
+            return new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
+        }
+    }
+
+// unuse now
+	private float getAngle(Vector3 a,Vector3 b)
+	{
+		 Vector3 c = Vector3.Cross(a, b);
+        float angle = Vector3.Angle(a, b);
+
+         // a 到 b 的夹角
+        float sign = Mathf.Sign(Vector3.Dot(c.normalized, Vector3.Cross(b, a)));
+        float signed_angle = angle * sign;
+
+        Debug.Log("b -> a :" + signed_angle);
+
+		return signed_angle;
+	}
+	private void dealRotation(int index)
+	{
+		float x=hand[index,0]-hand[1+index,0];
+		float y=hand[index,1]-hand[index+1,1];
+		float z=hand[index,2]-hand[index+1,2];
+
+		Vector3 relativePos = new Vector3(x,y,z);
+        // the second argument, upwards, defaults to Vector3.up
+		if(index==0)
+        	laser_left.transform.rotation=Quaternion.LookRotation(GetVerticalDir(relativePos),relativePos);
+		else
+			laser_right.transform.rotation=Quaternion.LookRotation(GetVerticalDir(relativePos),relativePos);
+	}
+	
 	public void setLaserPos()
 	{
 		Debug.Log("flag");
@@ -46,6 +93,9 @@ public class Web:MonoBehaviour
 			Debug.Log(laser_left.transform.position.x);
 			laser_left.transform.position=new Vector3(hand[0,0],hand[0,1],hand[0,2]);
 			laser_right.transform.position=new Vector3(hand[2,0],hand[2,1],hand[2,2]);
+			// 0-1 2-3
+			dealRotation(0);
+			dealRotation(2);
 			//flag=0;
 		}
 	}

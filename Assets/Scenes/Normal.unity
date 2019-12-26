@@ -204,15 +204,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 448804, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 448804, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 448804, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 448804, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -253,22 +253,22 @@ PrefabInstance:
     - target: {fileID: 3397354, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1793960555}
+      objectReference: {fileID: 989100270}
     - target: {fileID: 6430606, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1793960555}
+      objectReference: {fileID: 989100270}
     - target: {fileID: 11449412, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: RotationSpeed.x
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11449412, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: RotationSpeed.y
-      value: 80
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11449412, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: RotationSpeed.z
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
@@ -458,15 +458,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 448804, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 448804, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 448804, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 448804, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -503,11 +503,23 @@ PrefabInstance:
     - target: {fileID: 3397354, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1086123736}
+      objectReference: {fileID: 1773877213}
     - target: {fileID: 6430606, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1086123736}
+      objectReference: {fileID: 1773877213}
+    - target: {fileID: 11449412, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
+      propertyPath: RotationSpeed.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449412, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
+      propertyPath: RotationSpeed.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449412, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
+      propertyPath: RotationSpeed.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4055cd0b1c63c62488823f03b99fcde6, type: 3}
 --- !u!224 &522303217 stripped
@@ -999,7 +1011,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   maxRaycastHits: 64
---- !u!43 &1086123736
+--- !u!43 &989100270
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1336,7 +1348,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 873428114}
   m_PrefabAsset: {fileID: 0}
---- !u!43 &1793960555
+--- !u!43 &1773877213
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
