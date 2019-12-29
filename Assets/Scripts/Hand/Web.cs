@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 
 using System.Threading;
@@ -20,11 +22,13 @@ public class Web : MonoBehaviour
 
     private static GameObject laser_left;
     private static GameObject laser_right;
-
     private static int flag = 0;
+
+    private Text text;
 
     void Start()
     {
+        text = GameObject.Find("WebMessage").GetComponent<Text>();
         Debug.Log("In Main: Creating the Child thread");
         hand = new float[4, 3];
         //parseString ("{"Right hand": "{"Distal": "85.6001205444 99.5957107544 89.5335693359", "Proximal": "94.1328048706 123.874298096 69.6296234131"}", "Left hand": "{"Distal": "-57.0477333069 52.4687042236 109.270484924", "Proximal": "-69.1746292114 82.2418823242 107.529426575"}"}");
@@ -81,6 +85,7 @@ public class Web : MonoBehaviour
     {
         if (flag == 1)
         {
+            ShowMessage("suceess to parse message");
             //laser_left.transform.position = new Vector3(hand[0, 0], hand[0, 1], hand[0, 2]);
             //laser_right.transform.position = new Vector3(hand[2, 0], hand[2, 1], hand[2, 2]);
             Debug.Log(string.Format("left laser pos is ({0},{1},{2})\n", hand[0, 0], hand[0, 1], hand[0, 2]));
@@ -90,6 +95,7 @@ public class Web : MonoBehaviour
             dealRotation(2);
             //flag=0;
         }
+        else ShowMessage("faild to parse message or not received");
     }
 
     private static void getFloat(int index, string input)
@@ -159,5 +165,10 @@ public class Web : MonoBehaviour
             parseString(message);
         }
 
+    }
+    //只能在主线程被调用
+    void ShowMessage(String message)
+    {
+        text.text = message;
     }
 }
