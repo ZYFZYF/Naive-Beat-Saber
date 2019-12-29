@@ -72,8 +72,7 @@ namespace DigitalRuby.LaserSword
         private float bladeIntensity;
         private MaterialPropertyBlock glowBlock;
 
-        private Web instance;
-
+        private Web web;
         private void CheckState()
         {
             if (state == 2 || state == 3)
@@ -132,7 +131,7 @@ namespace DigitalRuby.LaserSword
 
         private void Start()
         {
-            instance=Web.getInstance();
+            web = GameObject.Find("Player").GetComponent<Web>();
             glowBlock = new MaterialPropertyBlock();
             creationScript = GetComponent<LaserSwordBladeCreatorScript>();
             BladeEnd.transform.position = BladeStart.transform.position;
@@ -141,7 +140,7 @@ namespace DigitalRuby.LaserSword
 
         private void Update()
         {
-            instance.setLaserPos();
+            web.setLaserPos();
             Root.transform.Rotate(RotationSpeed * Time.deltaTime);
             CheckState();
             UpdateBlade();
