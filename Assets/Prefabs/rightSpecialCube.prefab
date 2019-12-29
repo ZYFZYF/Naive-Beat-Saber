@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dfa8fdd8eedb4022b2ba8a6d3aa132d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collideSound: {fileID: 8300000, guid: ed3e3d14289f149248017504b75bcdb6, type: 3}
+  collideSound: {fileID: 8300000, guid: a7684e8209a5043b5a78683bc6438cc6, type: 3}
 --- !u!114 &6037626904339010662
 MonoBehaviour:
   m_ObjectHideFlags: 0
