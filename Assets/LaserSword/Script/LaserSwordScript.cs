@@ -39,23 +39,8 @@ namespace DigitalRuby.LaserSword
         [Tooltip("Light game object.")]
         public Light Light;
 
-        [Tooltip("Audio source.")]
-        public AudioSource AudioSource;
-
-        [Tooltip("Audio source for looping.")]
-        public AudioSource AudioSourceLoop;
-
         [Tooltip("How long it takes to turn the laser sword on and off")]
         public float ActivationTime = 0.5f;
-
-        [Tooltip("Sound to play when the laser sword turns on")]
-        public AudioClip StartSound;
-
-        [Tooltip("Sound to play when the laser sword turns off")]
-        public AudioClip StopSound;
-
-        [Tooltip("Sound to play when the laser sword stays on")]
-        public AudioClip ConstantSound;
 
         [Tooltip("Blade start")]
         public GameObject BladeStart;
@@ -166,16 +151,11 @@ namespace DigitalRuby.LaserSword
             {
                 bladeDir = 1.0f;
                 state = 3;
-                AudioSource.PlayOneShot(StartSound);
-                AudioSourceLoop.clip = ConstantSound;
-                AudioSourceLoop.Play();
             }
             else
             {
                 bladeDir = -1.0f;
                 state = 2;
-                AudioSource.PlayOneShot(StopSound);
-                AudioSourceLoop.Stop();
             }
 
             return true;
