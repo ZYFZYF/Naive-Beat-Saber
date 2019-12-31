@@ -86,10 +86,10 @@ public class Web : MonoBehaviour
         if (flag == 1)
         {
             ShowMessage("suceess to parse message");
-            //laser_left.transform.position = new Vector3(hand[0, 0], hand[0, 1], hand[0, 2]);
-            //laser_right.transform.position = new Vector3(hand[2, 0], hand[2, 1], hand[2, 2]);
-            Debug.Log(string.Format("left laser pos is ({0},{1},{2})\n", hand[0, 0], hand[0, 1], hand[0, 2]));
-            Debug.Log(string.Format("right laser pos is ({0},{1},{2})\n", hand[2, 0], hand[2, 1], hand[2, 2]));
+            laser_left.transform.position = new Vector3(hand[0, 0], hand[0, 1], hand[0, 2]);
+            laser_right.transform.position = new Vector3(hand[2, 0], hand[2, 1], hand[2, 2]);
+            //Debug.Log(string.Format("left laser pos is ({0},{1},{2})\n", hand[0, 0], hand[0, 1], hand[0, 2]));
+            //Debug.Log(string.Format("right laser pos is ({0},{1},{2})\n", hand[2, 0], hand[2, 1], hand[2, 2]));
             // 0-1 2-3
             dealRotation(0);
             dealRotation(2);
