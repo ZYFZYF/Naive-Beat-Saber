@@ -38,7 +38,7 @@ public class Collide : MonoBehaviour
         Vector3 difference = hitpoint - core;
         float eps = 0.00001f;
         Debug.Log(name + " is collided with " + mycollider.name);
-        if (mycollider.name == "LaserSwordPrefab_Left" || mycollider.name == "LaserSwordPrefab_Right")
+        if ((mycollider.name == "LaserSwordPrefab_Left" && this.meta.color == 0) ||(mycollider.name == "LaserSwordPrefab_Right" && this.meta.color == 1))
         {
             Debug.Log("I'm here");
             if (this.meta.direction == 0)
