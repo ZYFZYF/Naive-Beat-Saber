@@ -33,33 +33,38 @@ public class Collide : MonoBehaviour
         Vector3 direction = contact.normal;
         // Debug.Log(name + " is collided!");
         // Debug.Log(direction.x + ","+direction.y);
-        if(this.meta.direction == 0) {
+        Collider mycollider = collision.collider;
+        if(mycollider.name == "LaserSwordPrefab_left" ||mycollider.name == "LaserSwordPrefab_right") {
+            if(this.meta.direction == 0) {
             if(direction.x < 0 && direction.y == 0) valideCollision = true;
-        }
-        else if(this.meta.direction == 1){
-            if(direction.x < 0 && direction.y > 0) valideCollision = true;
-        }
-        else if(this.meta.direction == 2){
-            if(direction.x == 0 && direction.y > 0) valideCollision = true;
-        }
-        else if(this.meta.direction == 3){
-            if(direction.x > 0 && direction.y > 0) valideCollision = true;
-        }
-        else if(this.meta.direction == 4){
-            if(direction.x > 0 && direction.y == 0) valideCollision = true;
-        }
-        else if(this.meta.direction == 5){
-            if(direction.x > 0 && direction.y < 0) valideCollision = true;
-        }
-        else if(this.meta.direction == 6){
-            if(direction.x == 0 && direction.y < 0) valideCollision = true;
-        }
-        else if(this.meta.direction == 7){
-            if(direction.x < 0 && direction.y < 0) valideCollision = true;
-        }
-        else if(this.meta.direction == -1) {
-            valideCollision = true;
-        }
+            }
+            else if(this.meta.direction == 1){
+                if(direction.x < 0 && direction.y > 0) valideCollision = true;
+            }
+            else if(this.meta.direction == 2){
+                if(direction.x == 0 && direction.y > 0) valideCollision = true;
+            }
+            else if(this.meta.direction == 3){
+                if(direction.x > 0 && direction.y > 0) valideCollision = true;
+            }
+            else if(this.meta.direction == 4){
+                if(direction.x > 0 && direction.y == 0) valideCollision = true;
+            }
+            else if(this.meta.direction == 5){
+                if(direction.x > 0 && direction.y < 0) valideCollision = true;
+            }
+            else if(this.meta.direction == 6){
+                if(direction.x == 0 && direction.y < 0) valideCollision = true;
+            }
+            else if(this.meta.direction == 7){
+                if(direction.x < 0 && direction.y < 0) valideCollision = true;
+            }
+            else if(this.meta.direction == -1) {
+                valideCollision = true;
+            }
+        }  
+        // Debug.Log(name + " is collided!");
+        // Debug.Log(direction.x + ","+direction.y);
         if (valideCollision)
         {
             isCollided = true;
