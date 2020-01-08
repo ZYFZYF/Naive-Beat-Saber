@@ -37,49 +37,52 @@ public class Collide : MonoBehaviour
         Vector3 core = this.transform.position;
         Vector3 difference = hitpoint - core;
         float eps = 0.00001f;
-        if (mycollider.name == "LaserSwordPrefab_left" || mycollider.name == "LaserSwordPrefab_right")
+        Debug.Log(name + " is collided with " + mycollider.name);
+        if (mycollider.name == "LaserSwordPrefab_Left" || mycollider.name == "LaserSwordPrefab_Right")
         {
+            Debug.Log("I'm here");
             if (this.meta.direction == 0)
             {
-                if (difference.x>0) {
-                    valideCollision = true;
-                }
+                if (difference.y > 0) valideCollision = true;
             }
             else if (this.meta.direction == 1)
             {
-                if (difference.x>0 && difference.y>0) valideCollision = true;
+                if (difference.x < 0 && difference.y > 0) valideCollision = true;
             }
             else if (this.meta.direction == 2)
             {
-                if (difference.y>0) valideCollision = true;
+                if (difference.x < 0) valideCollision = true;
             }
             else if (this.meta.direction == 3)
             {
-                if (difference.x<0 && difference.y>0) valideCollision = true;
+                if (difference.x < 0 && difference.y < 0) valideCollision = true;
             }
             else if (this.meta.direction == 4)
             {
-                if (difference.x<0) valideCollision = true;
+                if (difference.y < 0) valideCollision = true;
             }
             else if (this.meta.direction == 5)
             {
-                if (difference.x<0 && difference.y<0) valideCollision = true;
+                if (difference.y < 0 && difference.x > 0) valideCollision = true;
             }
             else if (this.meta.direction == 6)
             {
-                if (difference.y<0) valideCollision = true;
+                if (difference.x > 0)
+                {
+                    valideCollision = true;
+                }
             }
             else if (this.meta.direction == 7)
             {
-                if (difference.y<0 && difference.x>0) valideCollision = true;
+                if (difference.x > 0 && difference.y > 0) valideCollision = true;
             }
             else if (this.meta.direction == -1)
             {
                 valideCollision = true;
             }
         }
-        Debug.Log(name + " is collided!");
-        Debug.Log(direction.x + "," + direction.y);
+        Debug.Log("cube's direction is " + meta.direction);
+        Debug.Log("difference : " + difference.x + "," + difference.y + " direction : " + direction.x + "," + direction.y);
         Debug.Log("judge result is " + valideCollision);
         // Debug.Log(name + " is collided!");
         // Debug.Log(direction.x + ","+direction.y);
@@ -91,6 +94,7 @@ public class Collide : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
 
 
     // void OnTriggerEnter(Collider collider)
