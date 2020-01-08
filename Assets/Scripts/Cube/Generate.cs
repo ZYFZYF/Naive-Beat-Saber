@@ -14,9 +14,9 @@ public class Generate : MonoBehaviour
     private int destroyCubeIndex = 0;
     private int generateCubeIndex = 0;
     private int cubeCount;
-    static public float Z_MOVE_TARGET = 0;//被切割的Z位置
-    static public float Z_MOVE_TIME = 5;//从生成的地方飘到被切割的地方所需花费的时间
-    static public float Z_MOVE_SPEED = 8;//飘的速度
+    static public float Z_MOVE_TARGET = 1;//被切割的Z位置
+    static public float Z_MOVE_TIME = 2;//从生成的地方飘到被切割的地方所需花费的时间
+    static public float Z_MOVE_SPEED = 30;//飘的速度
     private float X_START_POS = -1.5f;
     private float X_STEP_LENGTH = 1;
     private float Y_CENTER_POS = 2;
@@ -26,7 +26,7 @@ public class Generate : MonoBehaviour
 
     void Start()
     {
-        TextAsset textAsset = Resources.Load("test", typeof(TextAsset)) as TextAsset;
+        TextAsset textAsset = Resources.Load("dejavu", typeof(TextAsset)) as TextAsset;
         string[] lineArray = textAsset.text.Split('\n');
         cubeCount = lineArray.Length - 1;
         cubeData = new string[cubeCount][];
@@ -38,7 +38,7 @@ public class Generate : MonoBehaviour
                 //Debug.Log(string.Format("{0} {1} {2}", i, j, cubeData[i][j]));
             }
         }
-        
+
     }
     // Update is called once per frame
     void Update()
@@ -67,6 +67,7 @@ public class Generate : MonoBehaviour
             GameObject cube = Instantiate(template, position, Quaternion.identity);
             if (direction >= 0) cube.transform.Rotate(rotation);
             cube.name = "Cube " + generateCubeIndex;
+            cube.transform.localScale *= 0.8f;
             Meta meta = cube.GetComponent<Meta>();
             meta.color = color;
             meta.direction = direction;
