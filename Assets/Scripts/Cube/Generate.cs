@@ -26,7 +26,7 @@ public class Generate : MonoBehaviour
 
     void Start()
     {
-        TextAsset textAsset = Resources.Load("dejavu", typeof(TextAsset)) as TextAsset;
+        TextAsset textAsset = Resources.Load("you", typeof(TextAsset)) as TextAsset;
         string[] lineArray = textAsset.text.Split('\n');
         cubeCount = lineArray.Length - 1;
         cubeData = new string[cubeCount][];

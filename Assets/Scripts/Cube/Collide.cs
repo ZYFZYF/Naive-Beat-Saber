@@ -95,8 +95,6 @@ public class Collide : MonoBehaviour
         }
     }
 
-
-
     // void OnTriggerEnter(Collider collider)
     // {
     //     //如果被碰撞过了，就不管接下来的碰撞
