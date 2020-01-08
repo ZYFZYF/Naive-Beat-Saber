@@ -21,21 +21,70 @@ public class Collide : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider collider)
-    {
-        //如果被碰撞过了，就不管接下来的碰撞
+    void OnCollisionEnter(Collision collision) {
         if (isCollided) return;
-        Debug.Log(name + " is collided!");
-        Debug.Log(meta.color);//color 和 direction的值的含义参见README.md
-        Debug.Log(meta.direction);
-        bool valideCollision = true;
+        // Debug.Log(name + " is collided!");
+        // Debug.Log(meta.color);//color 和 direction的值的含义参见README.md
+        // Debug.Log(meta.direction);
+        bool valideCollision = false;
         // TODO 这里是物理上的碰撞，还需要检测逻辑上的碰撞是否合法
         // TODO 这里要做物体的切开动画
+        ContactPoint contact = collision.contacts[0];
+        Vector3 direction = contact.normal;
+        // Debug.Log(name + " is collided!");
+        // Debug.Log(direction.x + ","+direction.y);
+        if(this.meta.direction == 0) {
+            if(direction.x < 0 && direction.y == 0) valideCollision = true;
+        }
+        else if(this.meta.direction == 1){
+            if(direction.x < 0 && direction.y > 0) valideCollision = true;
+        }
+        else if(this.meta.direction == 2){
+            if(direction.x == 0 && direction.y > 0) valideCollision = true;
+        }
+        else if(this.meta.direction == 3){
+            if(direction.x > 0 && direction.y > 0) valideCollision = true;
+        }
+        else if(this.meta.direction == 4){
+            if(direction.x > 0 && direction.y == 0) valideCollision = true;
+        }
+        else if(this.meta.direction == 5){
+            if(direction.x > 0 && direction.y < 0) valideCollision = true;
+        }
+        else if(this.meta.direction == 6){
+            if(direction.x == 0 && direction.y < 0) valideCollision = true;
+        }
+        else if(this.meta.direction == 7){
+            if(direction.x < 0 && direction.y < 0) valideCollision = true;
+        }
+        else if(this.meta.direction == -1) {
+            valideCollision = true;
+        }
         if (valideCollision)
         {
             isCollided = true;
             AudioSource.PlayClipAtPoint(collideSound, transform.position);
-            renderer.enabled = false;
+            // Debug.Log("destroy cube "+this.name);
+            Destroy(this.gameObject);
         }
     }
+
+
+    // void OnTriggerEnter(Collider collider)
+    // {
+    //     //如果被碰撞过了，就不管接下来的碰撞
+    //     if (isCollided) return;
+    //     Debug.Log(name + " is collided!");
+    //     Debug.Log(meta.color);//color 和 direction的值的含义参见README.md
+    //     Debug.Log(meta.direction);
+    //     bool valideCollision = true;
+    //     // TODO 这里是物理上的碰撞，还需要检测逻辑上的碰撞是否合法
+    //     // TODO 这里要做物体的切开动画
+    //     if (valideCollision)
+    //     {
+    //         isCollided = true;
+    //         AudioSource.PlayClipAtPoint(collideSound, transform.position);
+    //         renderer.enabled = false;
+    //     }
+    // }
 }

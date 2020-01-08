@@ -21,7 +21,7 @@ public class Generate : MonoBehaviour
     private float X_STEP_LENGTH = 1;
     private float Y_CENTER_POS = 2;
     private float Y_STEP_LENGTH = 1;
-    private float Z_DISAPPEAR_POS = -1;
+    private float Z_DISAPPEAR_POS = 0.2f;
     // Use this for initialization
 
     void Start()
@@ -70,20 +70,38 @@ public class Generate : MonoBehaviour
             Meta meta = cube.GetComponent<Meta>();
             meta.color = color;
             meta.direction = direction;
-            Debug.Log("generate " + cube.name);
+            // Debug.Log("generate " + cube.name);
             generateCubeIndex++;
         }
 
         while (destroyCubeIndex < generateCubeIndex)
         {
             GameObject destroyCube = GameObject.Find("Cube " + destroyCubeIndex);
-            if (destroyCube != null && destroyCube.transform.position.z < Z_DISAPPEAR_POS)
-            {
-                Destroy(destroyCube);
-                destroyCubeIndex++;
-                Debug.Log("destroy cube " + destroyCubeIndex);
+            Debug.Log(destroyCube);
+            if(destroyCube != null) {
+                if(destroyCube.transform.position.z < Z_DISAPPEAR_POS){
+                    Destroy(destroyCube);
+                    Debug.Log("destroy cube " + destroyCubeIndex);
+                    destroyCubeIndex++;
+                }
+                else break;
             }
-            else break;
+            else {
+                destroyCubeIndex++;
+                Debug.Log("add destroy cube " + destroyCubeIndex);
+            }
+            // if (destroyCube != null && destroyCube.transform.position.z < Z_DISAPPEAR_POS)
+            // {
+            //     Destroy(destroyCube);
+            //     destroyCubeIndex++;
+            //     Debug.Log("teste!!!!");
+            //     Debug.Log("destroy cube " + destroyCubeIndex);
+            // }
+            // else {
+            //     destroyCubeIndex++;
+            //     Debug.Log("teste!!!!");
+            //     Debug.Log("destroy cube " + destroyCubeIndex);
+            // }
         }
     }
 }
