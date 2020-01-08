@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class Collide : MonoBehaviour
 {
     public AudioClip collideSound;
@@ -32,51 +32,53 @@ public class Collide : MonoBehaviour
         // TODO 这里要做物体的切开动画
         ContactPoint contact = collision.contacts[0];
         Vector3 direction = contact.normal;
-        // Debug.Log(name + " is collided!");
-        // Debug.Log(direction.x + ","+direction.y);
         Collider mycollider = collision.collider;
+        float eps = 0.00001f;
         if (mycollider.name == "LaserSwordPrefab_left" || mycollider.name == "LaserSwordPrefab_right")
         {
             if (this.meta.direction == 0)
             {
-                if (direction.x < 0 && direction.y == 0) valideCollision = true;
+                if (direction.x < -eps && Math.Abs(direction.y) < eps) valideCollision = true;
             }
             else if (this.meta.direction == 1)
             {
-                if (direction.x < 0 && direction.y > 0) valideCollision = true;
+                if (direction.x < -eps && Math.Abs(direction.y) > eps) valideCollision = true;
             }
             else if (this.meta.direction == 2)
             {
-                if (direction.x == 0 && direction.y > 0) valideCollision = true;
+                if (Math.Abs(direction.x) < eps && direction.y > eps) valideCollision = true;
             }
             else if (this.meta.direction == 3)
             {
-                if (direction.x > 0 && direction.y > 0) valideCollision = true;
+                if (direction.x > eps && direction.y > eps) valideCollision = true;
             }
             else if (this.meta.direction == 4)
             {
-                if (direction.x > 0 && direction.y == 0) valideCollision = true;
+                if (direction.x > eps && Math.Abs(direction.y) < eps) valideCollision = true;
             }
             else if (this.meta.direction == 5)
             {
-                if (direction.x > 0 && direction.y < 0) valideCollision = true;
+                if (direction.x > eps && direction.y < -eps) valideCollision = true;
             }
             else if (this.meta.direction == 6)
             {
-                if (direction.x == 0 && direction.y < 0) valideCollision = true;
+                if (Math.Abs(direction.x) < eps && direction.y < -eps) valideCollision = true;
             }
             else if (this.meta.direction == 7)
             {
-                if (direction.x < 0 && direction.y < 0) valideCollision = true;
+                if (direction.x < -eps && direction.y < -eps) valideCollision = true;
             }
             else if (this.meta.direction == -1)
             {
                 valideCollision = true;
             }
         }
+        Debug.Log(name + " is collided!");
+        Debug.Log(direction.x + "," + direction.y);
+        Debug.Log("judge result is " + valideCollision);
         // Debug.Log(name + " is collided!");
         // Debug.Log(direction.x + ","+direction.y);
-        //if (valideCollision)
+        if (valideCollision)
         {
             isCollided = true;
             AudioSource.PlayClipAtPoint(collideSound, transform.position);

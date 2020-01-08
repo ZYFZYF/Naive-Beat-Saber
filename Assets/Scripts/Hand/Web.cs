@@ -29,7 +29,7 @@ public class Web : MonoBehaviour
     void Start()
     {
         text = GameObject.Find("WebMessage").GetComponent<Text>();
-        Debug.Log("In Main: Creating the Child thread");
+        //Debug.Log("In Main: Creating the Child thread");
         hand = new float[4, 3];
         //parseString ("{"Right hand": "{"Distal": "85.6001205444 99.5957107544 89.5335693359", "Proximal": "94.1328048706 123.874298096 69.6296234131"}", "Left hand": "{"Distal": "-57.0477333069 52.4687042236 109.270484924", "Proximal": "-69.1746292114 82.2418823242 107.529426575"}"}");
         ThreadStart childref = new ThreadStart(CallToChildThread);
@@ -103,18 +103,18 @@ public class Web : MonoBehaviour
         String[] sArray = input.Split(' ');
         for (int i = 0; i < 3; i++)
             hand[index, i] = Convert.ToSingle(sArray[i]) / 120f;
-        Debug.Log(string.Format("get float ({0}, {1}, {2})", hand[index, 0], hand[index, 1], hand[index, 2]));
+        //Debug.Log(string.Format("get float ({0}, {1}, {2})", hand[index, 0], hand[index, 1], hand[index, 2]));
     }
     private static void parseString(string message)
     {
         try
         {
-            Debug.Log("in parseString " + message);
+            //Debug.Log("in parseString " + message);
             JObject jo = JObject.Parse(message);
             foreach (var x in jo)
             {
-                Debug.Log(x.Key + x.Value);
-                Console.WriteLine("{0} : {1}", x.Key, x.Value);
+                //Debug.Log(x.Key + x.Value);
+                //Console.WriteLine("{0} : {1}", x.Key, x.Value);
                 string singlehand = x.Value.ToString();
                 JObject singleObj = JObject.Parse(singlehand);
                 if (x.Key == "Left hand")
@@ -127,7 +127,7 @@ public class Web : MonoBehaviour
                     getFloat(2, singleObj["Distal"].ToString());
                     getFloat(3, singleObj["Proximal"].ToString());
                 }
-                Debug.Log("parse succeed");
+                // UpdateDebug.Log("parse succeed");
             }
             flag = 1;
         }

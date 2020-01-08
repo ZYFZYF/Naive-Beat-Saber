@@ -67,7 +67,7 @@ public class Generate : MonoBehaviour
             GameObject cube = Instantiate(template, position, Quaternion.identity);
             if (direction >= 0) cube.transform.Rotate(rotation);
             cube.name = "Cube " + generateCubeIndex;
-            cube.transform.localScale *= 0.8f;
+            //cube.transform.localScale *= 0.8f;
             Meta meta = cube.GetComponent<Meta>();
             meta.color = color;
             meta.direction = direction;
@@ -78,13 +78,13 @@ public class Generate : MonoBehaviour
         while (destroyCubeIndex < generateCubeIndex)
         {
             GameObject destroyCube = GameObject.Find("Cube " + destroyCubeIndex);
-            Debug.Log(destroyCube);
             if (destroyCube != null)
             {
                 if (destroyCube.transform.position.z < Z_DISAPPEAR_POS)
                 {
+                    //Debug.Log(destroyCube);
                     Destroy(destroyCube);
-                    Debug.Log("destroy cube " + destroyCubeIndex);
+                    //Debug.Log("destroy cube " + destroyCubeIndex);
                     destroyCubeIndex++;
                 }
                 else break;
@@ -92,7 +92,7 @@ public class Generate : MonoBehaviour
             else
             {
                 destroyCubeIndex++;
-                Debug.Log("add destroy cube " + destroyCubeIndex);
+                //Debug.Log("add destroy cube " + destroyCubeIndex);
             }
             // if (destroyCube != null && destroyCube.transform.position.z < Z_DISAPPEAR_POS)
             // {
