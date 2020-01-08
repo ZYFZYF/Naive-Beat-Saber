@@ -21,7 +21,8 @@ public class Collide : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision collision) {
+    void OnCollisionEnter(Collision collision)
+    {
         if (isCollided) return;
         // Debug.Log(name + " is collided!");
         // Debug.Log(meta.color);//color 和 direction的值的含义参见README.md
@@ -34,38 +35,48 @@ public class Collide : MonoBehaviour
         // Debug.Log(name + " is collided!");
         // Debug.Log(direction.x + ","+direction.y);
         Collider mycollider = collision.collider;
-        if(mycollider.name == "LaserSwordPrefab_left" ||mycollider.name == "LaserSwordPrefab_right") {
-            if(this.meta.direction == 0) {
-            if(direction.x < 0 && direction.y == 0) valideCollision = true;
+        if (mycollider.name == "LaserSwordPrefab_left" || mycollider.name == "LaserSwordPrefab_right")
+        {
+            if (this.meta.direction == 0)
+            {
+                if (direction.x < 0 && direction.y == 0) valideCollision = true;
             }
-            else if(this.meta.direction == 1){
-                if(direction.x < 0 && direction.y > 0) valideCollision = true;
+            else if (this.meta.direction == 1)
+            {
+                if (direction.x < 0 && direction.y > 0) valideCollision = true;
             }
-            else if(this.meta.direction == 2){
-                if(direction.x == 0 && direction.y > 0) valideCollision = true;
+            else if (this.meta.direction == 2)
+            {
+                if (direction.x == 0 && direction.y > 0) valideCollision = true;
             }
-            else if(this.meta.direction == 3){
-                if(direction.x > 0 && direction.y > 0) valideCollision = true;
+            else if (this.meta.direction == 3)
+            {
+                if (direction.x > 0 && direction.y > 0) valideCollision = true;
             }
-            else if(this.meta.direction == 4){
-                if(direction.x > 0 && direction.y == 0) valideCollision = true;
+            else if (this.meta.direction == 4)
+            {
+                if (direction.x > 0 && direction.y == 0) valideCollision = true;
             }
-            else if(this.meta.direction == 5){
-                if(direction.x > 0 && direction.y < 0) valideCollision = true;
+            else if (this.meta.direction == 5)
+            {
+                if (direction.x > 0 && direction.y < 0) valideCollision = true;
             }
-            else if(this.meta.direction == 6){
-                if(direction.x == 0 && direction.y < 0) valideCollision = true;
+            else if (this.meta.direction == 6)
+            {
+                if (direction.x == 0 && direction.y < 0) valideCollision = true;
             }
-            else if(this.meta.direction == 7){
-                if(direction.x < 0 && direction.y < 0) valideCollision = true;
+            else if (this.meta.direction == 7)
+            {
+                if (direction.x < 0 && direction.y < 0) valideCollision = true;
             }
-            else if(this.meta.direction == -1) {
+            else if (this.meta.direction == -1)
+            {
                 valideCollision = true;
             }
-        }  
+        }
         // Debug.Log(name + " is collided!");
         // Debug.Log(direction.x + ","+direction.y);
-        if (valideCollision)
+        //if (valideCollision)
         {
             isCollided = true;
             AudioSource.PlayClipAtPoint(collideSound, transform.position);

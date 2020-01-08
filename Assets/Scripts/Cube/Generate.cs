@@ -15,7 +15,7 @@ public class Generate : MonoBehaviour
     private int generateCubeIndex = 0;
     private int cubeCount;
     static public float Z_MOVE_TARGET = 1;//被切割的Z位置
-    static public float Z_MOVE_TIME = 1;//从生成的地方飘到被切割的地方所需花费的时间
+    static public float Z_MOVE_TIME = 2;//从生成的地方飘到被切割的地方所需花费的时间
     static public float Z_MOVE_SPEED = 20;//飘的速度
     private float X_START_POS = -1.5f;
     private float X_STEP_LENGTH = 1;
