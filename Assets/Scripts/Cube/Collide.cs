@@ -33,40 +33,45 @@ public class Collide : MonoBehaviour
         ContactPoint contact = collision.contacts[0];
         Vector3 direction = contact.normal;
         Collider mycollider = collision.collider;
+        Vector3 hitpoint = contact.point;
+        Vector3 core = this.transform.position;
+        Vector3 difference = hitpoint - core;
         float eps = 0.00001f;
         if (mycollider.name == "LaserSwordPrefab_left" || mycollider.name == "LaserSwordPrefab_right")
         {
             if (this.meta.direction == 0)
             {
-                if (direction.x < -eps && Math.Abs(direction.y) < eps) valideCollision = true;
+                if (difference.x>0) {
+                    valideCollision = true;
+                }
             }
             else if (this.meta.direction == 1)
             {
-                if (direction.x < -eps && Math.Abs(direction.y) > eps) valideCollision = true;
+                if (difference.x>0 && difference.y>0) valideCollision = true;
             }
             else if (this.meta.direction == 2)
             {
-                if (Math.Abs(direction.x) < eps && direction.y > eps) valideCollision = true;
+                if (difference.y>0) valideCollision = true;
             }
             else if (this.meta.direction == 3)
             {
-                if (direction.x > eps && direction.y > eps) valideCollision = true;
+                if (difference.x<0 && difference.y>0) valideCollision = true;
             }
             else if (this.meta.direction == 4)
             {
-                if (direction.x > eps && Math.Abs(direction.y) < eps) valideCollision = true;
+                if (difference.x<0) valideCollision = true;
             }
             else if (this.meta.direction == 5)
             {
-                if (direction.x > eps && direction.y < -eps) valideCollision = true;
+                if (difference.x<0 && difference.y<0) valideCollision = true;
             }
             else if (this.meta.direction == 6)
             {
-                if (Math.Abs(direction.x) < eps && direction.y < -eps) valideCollision = true;
+                if (difference.y<0) valideCollision = true;
             }
             else if (this.meta.direction == 7)
             {
-                if (direction.x < -eps && direction.y < -eps) valideCollision = true;
+                if (difference.y<0 && difference.x>0) valideCollision = true;
             }
             else if (this.meta.direction == -1)
             {
