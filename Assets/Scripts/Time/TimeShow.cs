@@ -21,6 +21,6 @@ public class TimeShow : MonoBehaviour
         minute = (int)(now_time / 60);
         second = (int)(now_time - minute * 60);
         millisecond = (int)((now_time - (int)now_time) * 1000);
-        text.text = string.Format("{0:D2}:{1:D2}:{2:D2}", minute, second, millisecond);
+        //text.text = string.Format("{0:D2}:{1:D2}:{2:D2}", minute, second, millisecond);
     }
 }

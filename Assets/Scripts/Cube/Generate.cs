@@ -22,6 +22,8 @@ public class Generate : MonoBehaviour
     private float Y_CENTER_POS = 2;
     private float Y_STEP_LENGTH = 1;
     private float Z_DISAPPEAR_POS = 0.2f;
+    private Score score;
+
     // Use this for initialization
 
     void Start()
@@ -38,6 +40,7 @@ public class Generate : MonoBehaviour
                 //Debug.Log(string.Format("{0} {1} {2}", i, j, cubeData[i][j]));
             }
         }
+        score = GameObject.Find("Player").GetComponent<Score>();
 
     }
     // Update is called once per frame
@@ -82,6 +85,7 @@ public class Generate : MonoBehaviour
             {
                 if (destroyCube.transform.position.z < Z_DISAPPEAR_POS)
                 {
+                    score.comboCount = 0;
                     //Debug.Log(destroyCube);
                     Destroy(destroyCube);
                     //Debug.Log("destroy cube " + destroyCubeIndex);

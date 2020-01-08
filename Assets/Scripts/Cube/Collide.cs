@@ -8,11 +8,13 @@ public class Collide : MonoBehaviour
     private Renderer renderer;
     private bool isCollided = false;
     private Meta meta;
+    private Score score;
     // Start is called before the first frame update
     void Start()
     {
         renderer = GetComponent<Renderer>();
         meta = GetComponent<Meta>();
+        score = GameObject.Find("Player").GetComponent<Score>();
     }
 
     // Update is called once per frame
@@ -88,6 +90,8 @@ public class Collide : MonoBehaviour
         // Debug.Log(direction.x + ","+direction.y);
         if (valideCollision)
         {
+            score.comboCount++;
+            score.totalScore += score.comboCount;
             isCollided = true;
             AudioSource.PlayClipAtPoint(collideSound, transform.position);
             // Debug.Log("destroy cube "+this.name);

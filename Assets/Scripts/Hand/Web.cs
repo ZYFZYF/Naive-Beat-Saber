@@ -169,6 +169,6 @@ public class Web : MonoBehaviour
     //只能在主线程被调用
     void ShowMessage(String message)
     {
-        text.text = message;
+        //text.text = message;
     }
 }
